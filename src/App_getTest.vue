@@ -30,22 +30,17 @@ export default {
     async createPost() {
       // let url = 'https://jsonplaceholder.typicode.com/posts';
       let url = 'http://localhost/api/test01/vue03_add.php';
-      // const esc = encodeURIComponent;
-      // const params = this.post;
-      // const query = Object.keys(params).map(k => `${esc(k)}=${esc(params[k])}`).join('&');
+      const esc = encodeURIComponent;
+      const params = this.post;
+      const query = Object.keys(params).map(k => `${esc(k)}=${esc(params[k])}`).join('&');
       const request = new Request (
-        url, {
-          method: "POST",
+        url+'?'+query, {
+          method: "GET",
           mode: "cors",
-          cache: "default",
-          headers: new Headers({
-            'Content-Type': 'multipart/form-data'
-          }),
-          body: JSON.stringify(this.post)
+          cache: "default"
+          // body: JSON.stringify(this.post)
         }
       );
-
-      console.log('request = ', request);
 
       const res = await fetch(request);
       const data = await res.json();
