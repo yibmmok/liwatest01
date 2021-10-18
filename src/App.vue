@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="createPost">
+    <form id="form1" @submit.prevent="createPost">
       <div class="edBox">
         <input type="text" placeholder="name" v-model="post.text">
       </div>
@@ -30,6 +30,8 @@ export default {
     async createPost() {
       // let url = 'https://jsonplaceholder.typicode.com/posts';
       let url = 'http://localhost/api/test01/vue03_add.php';
+      let formobj = document.getElementById("form1");
+      let formData = new FormData(formobj);
       // const esc = encodeURIComponent;
       // const params = this.post;
       // const query = Object.keys(params).map(k => `${esc(k)}=${esc(params[k])}`).join('&');
@@ -41,7 +43,7 @@ export default {
           headers: new Headers({
             'Content-Type': 'multipart/form-data'
           }),
-          body: JSON.stringify(this.post)
+          body: JSON.stringify(formData)
         }
       );
 
